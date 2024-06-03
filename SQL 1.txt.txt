@@ -1,0 +1,163 @@
+-- Task 1
+
+ --SELECT w.name, w.places 
+ --FROM wards AS w
+ --JOIN departments AS des
+ --ON w.department_id = des.id
+ --WHERE des.building = 5 
+ --  AND w.places >= 5
+ --  AND EXISTS (SELECT 1 
+ --    FROM wards AS w
+	-- JOIN departments AS des
+	-- ON w.department_id = des.id
+	-- WHERE des.building = 5	
+	-- AND w.places > 15);
+
+
+
+-- Task 2
+ --SELECT DISTINCT des.name 
+ --FROM doctors_examinations AS de
+ --JOIN wards AS w
+ --ON d_e.ward_id = w.id
+ --JOIN departments AS des
+ --ON w.department_id = des.id
+ --WHERE (GETDATE() - de.ex_date) < '7 days';
+
+
+
+
+-- Task 3
+-- SELECT dis.name
+-- FROM diseases as dis
+-- WHERE dis.id NOT IN (
+--    SELECT dis.id
+--    FROM doctors_examinations AS de
+--    JOIN diseases AS dis
+--     ON de.disease_id = dis.id
+--    GROUP BY dis.id);
+
+
+
+
+-- Task 4
+-- SELECT CONCAT(ds.name, ' ', ds.surname) AS full_name
+-- FROM doctors AS ds
+-- WHERE ds.id NOT IN (
+   -- SELECT ds.id
+   -- FROM doctors_examinations AS de
+   -- JOIN doctors AS ds
+    -- ON de.doctor_id = ds.id
+   -- GROUP BY ds.id);
+
+
+
+
+
+-- Task 5
+-- SELECT des.name AS dep_name
+-- FROM departments AS des
+-- WHERE des.id NOT IN (
+--    SELECT des.id
+--    FROM doctors_examinations AS de
+--    JOIN wards AS ws
+--     ON de.ward_id = ws.id
+--    JOIN departments AS des
+--	 ON ws.department_id = des.id
+--    GROUP BY des.id);
+
+
+
+-- Task 6
+
+-- SELECT ds.name AS doctor_name
+-- FROM doctors AS ds
+-- WHERE ds.id IN (
+--    SELECT ins.doctor_id
+--    FROM interns AS ins
+--    JOIN doctors AS ds
+--     ON ins.doctor_id = ds.id);
+
+
+
+-- Task 7
+-- SELECT ds.surname AS intern_surname
+-- FROM doctors as ds
+-- WHERE ds.id IN (
+--    SELECT ins.doctor_id
+--    FROM interns AS ins
+--    JOIN doctors AS ds
+--     ON ins.doctor_id = ds.id)
+--  AND ds.salary > (
+--    SELECT MIN(salary)
+--    FROM doctors);
+--   
+-- SELECT name, salary
+-- FROM doctors;
+   
+   
+
+
+
+-- Task 8
+-- SELECT ws.name, ws.places
+-- FROM wards AS ws
+-- WHERE ws.id NOT IN (
+--    SELECT ws.id
+--    FROM wards AS ws
+--    JOIN departments AS des
+--     ON ws.department_id = des.id
+--    WHERE des.building = 3)
+--  AND ws.places > (
+--    SELECT MAX(ws.places)
+--    FROM wards AS ws
+--    JOIN departments AS des
+--     ON ws.department_id = des.id
+--    WHERE des.building = 3
+--    );
+
+-- SELECT ws.name, ws.places, des.name, des.building
+-- FROM wards AS ws
+-- JOIN departments AS des
+--  ON ws.department_id = des.id
+-- ORDER BY ws.places desc;
+
+
+
+-- Task 9
+-- SELECT surname
+-- FROM doctors
+-- WHERE id IN (
+--    SELECT ds.id
+--    FROM doctors_examinations AS d_e
+--    JOIN doctors AS ds
+--     ON d_e.doctor_id = ds.id
+
+
+
+-- Task 10
+-- SELECT * 
+-- FROM departments AS des
+-- WHERE des.id IN (
+-- 	 SELECT des.id 
+--      FROM doctors_examinations AS de
+--      JOIN wards AS w
+--        ON de.ward_id = w.id
+--      JOIN departments AS des
+--        ON w.department_id = des.id
+--      JOIN doctors AS dos
+--        ON de.doctor_id = dos.id
+--      JOIN interns AS ins
+--        ON ins.doctor_id = dos.id)
+-- 	AND des.id IN (
+-- 	 SELECT des.id 
+--      FROM doctors_examinations AS de
+--      JOIN wards AS w
+--        ON de.ward_id = w.id
+--      JOIN departments AS des
+--        ON w.department_id = des.id
+--      JOIN doctors AS dos
+--        ON de.doctor_id = dos.id
+--      JOIN professors AS ps
+--        ON ps.doctor_id = dos.id);
+
